@@ -31,4 +31,6 @@ Route::group([
     Route::get('/surveys', [SurveysController::class, 'index'])->name('surveys.index');
     Route::post('/surveys', [SurveysController::class, 'store'])->name('surveys.store');
     Route::get('/surveys/create', [SurveysController::class, 'create'])->name('surveys.create');
+    Route::get('/surveys/{survey}/edit', [SurveysController::class, 'edit'])->name('surveys.edit');
+    Route::put('/surveys/{survey}', [SurveysController::class, 'update'])->name('surveys.update');
 });
