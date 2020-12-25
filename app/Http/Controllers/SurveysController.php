@@ -97,6 +97,23 @@ class SurveysController extends Controller
     }
 
     /**
+     * Destroy specified survey from databases
+     *
+     * @param Survey $survey
+     * @return Illuminate\Http\Response
+     */
+    public function destroy(Survey $survey)
+    {
+        $survey->delete();
+
+        return redirect()->route('admin.surveys.index')
+            ->with('message', [
+                'icon' => 'success',
+                'message' => 'Successfully destroy survey called ' . $survey->name . '!'
+            ]);
+    }
+
+    /**
      * Define rules for validating request
      *
      * @return array

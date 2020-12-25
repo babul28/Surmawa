@@ -28,9 +28,16 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
 ], function () {
-    Route::get('/surveys', [SurveysController::class, 'index'])->name('surveys.index');
-    Route::post('/surveys', [SurveysController::class, 'store'])->name('surveys.store');
-    Route::get('/surveys/create', [SurveysController::class, 'create'])->name('surveys.create');
-    Route::get('/surveys/{survey}/edit', [SurveysController::class, 'edit'])->name('surveys.edit');
-    Route::put('/surveys/{survey}', [SurveysController::class, 'update'])->name('surveys.update');
+    // Surveys Endpoint
+    Route::group([
+        'prefix' => '/surveys',
+        'as' => 'surveys.'
+    ], function () {
+        Route::get('/', [SurveysController::class, 'index'])->name('index');
+        Route::post('/', [SurveysController::class, 'store'])->name('store');
+        Route::get('/create', [SurveysController::class, 'create'])->name('create');
+        Route::get('/{survey}/edit', [SurveysController::class, 'edit'])->name('edit');
+        Route::put('/{survey}', [SurveysController::class, 'update'])->name('update');
+        Route::delete('/{survey}', [SurveysController::class, 'destroy'])->name('destroy');
+    });
 });

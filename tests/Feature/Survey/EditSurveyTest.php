@@ -111,7 +111,7 @@ class EditSurveyTest extends TestCase
             'lecture_id' => $lecture->id
         ]);
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecture)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'name' => ''
             ]));
@@ -130,7 +130,7 @@ class EditSurveyTest extends TestCase
             'lecture_id' => $lecture->id
         ]);
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecture)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'departement_name' => ''
             ]));
@@ -149,7 +149,7 @@ class EditSurveyTest extends TestCase
             'lecture_id' => $lecture->id
         ]);
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecture)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'faculty_name' => ''
             ]));
@@ -168,7 +168,7 @@ class EditSurveyTest extends TestCase
             'lecture_id' => $lecture->id
         ]);
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecture)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'university_name' => ''
             ]));
@@ -187,7 +187,7 @@ class EditSurveyTest extends TestCase
             'lecture_id' => $lecture->id
         ]);
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecture)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'expired_at' => ''
             ]));
@@ -206,7 +206,7 @@ class EditSurveyTest extends TestCase
             'lecture_id' => $lecture->id
         ]);
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecture)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'expired_at' => 'ini bukan date'
             ]));
