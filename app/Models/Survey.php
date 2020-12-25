@@ -9,5 +9,8 @@ class Survey extends Model
 {
     use HasFactory;
 
+    public const ACTIVE = 1;
+    public const DEACTIVE = 0;
+
     protected $guarded = [];
 }

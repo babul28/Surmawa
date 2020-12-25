@@ -29,4 +29,6 @@ Route::group([
     'as' => 'admin.',
 ], function () {
     Route::get('/surveys', [SurveysController::class, 'index'])->name('surveys.index');
+    Route::post('/surveys', [SurveysController::class, 'store'])->name('surveys.store');
+    Route::get('/surveys/create', [SurveysController::class, 'create'])->name('surveys.create');
 });
