@@ -35,6 +35,18 @@ class SurveysController extends Controller
     }
 
     /**
+     * Show specified survey
+     *
+     * @param Survey $survey
+     * @return Illuminate\Http\Response
+     */
+    public function show(Survey $survey)
+    {
+        return view('admin.surveys.show')
+            ->with('survey', $survey);
+    }
+
+    /**
      * Show view for create new survey
      *
      * @return Illuminate\Http\Response
@@ -59,7 +71,7 @@ class SurveysController extends Controller
             ])
         );
 
-        return redirect('admin/surveys/' . $survey->id)
+        return redirect()->route('admin.surveys.show', $survey->id)
             ->with('message', [
                 'icon' => 'success',
                 'message' => 'Successfully created new survey called ' . $survey->name . '!'
@@ -89,7 +101,7 @@ class SurveysController extends Controller
     {
         $survey->update($request->validate($this->rules()));
 
-        return redirect('admin/surveys/' . $survey->id)
+        return redirect()->route('admin.surveys.show', $survey->id)
             ->with('message', [
                 'icon' => 'success',
                 'message' => 'Successfully updating survey data!'

@@ -29,15 +29,5 @@ Route::group([
     'as' => 'admin.',
 ], function () {
     // Surveys Endpoint
-    Route::group([
-        'prefix' => '/surveys',
-        'as' => 'surveys.'
-    ], function () {
-        Route::get('/', [SurveysController::class, 'index'])->name('index');
-        Route::post('/', [SurveysController::class, 'store'])->name('store');
-        Route::get('/create', [SurveysController::class, 'create'])->name('create');
-        Route::get('/{survey}/edit', [SurveysController::class, 'edit'])->name('edit');
-        Route::put('/{survey}', [SurveysController::class, 'update'])->name('update');
-        Route::delete('/{survey}', [SurveysController::class, 'destroy'])->name('destroy');
-    });
+    Route::resource('/surveys', SurveysController::class);
 });
