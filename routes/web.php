@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SurveysController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin.',
+], function () {
+    Route::get('/surveys', [SurveysController::class, 'index'])->name('surveys.index');
+});
