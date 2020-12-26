@@ -31,7 +31,7 @@ class SurveysController extends Controller
     public function index()
     {
         return view('admin.surveys.index')
-            ->with('surveys', Survey::all());
+            ->with('surveys', $this->lecture->surveys);
     }
 
     /**
