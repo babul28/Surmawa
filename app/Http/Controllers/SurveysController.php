@@ -42,6 +42,10 @@ class SurveysController extends Controller
      */
     public function show(Survey $survey)
     {
+        // Checking authorization current user for
+        // view this survey
+        $this->authorize('view', $survey);
+
         return view('admin.surveys.show')
             ->with('survey', $survey);
     }
@@ -86,6 +90,10 @@ class SurveysController extends Controller
      */
     public function edit(Survey $survey)
     {
+        // Checking authorization current user for
+        // updating this survey
+        $this->authorize('update', $survey);
+
         return view('admin.surveys.edit')
             ->with('survey', $survey);
     }
@@ -99,6 +107,10 @@ class SurveysController extends Controller
      */
     public function update(Request $request, Survey $survey)
     {
+        // Checking authorization current user for
+        // updating this survey
+        $this->authorize('update', $survey);
+
         $survey->update($request->validate($this->rules()));
 
         return redirect()->route('admin.surveys.show', $survey->id)
@@ -116,6 +128,10 @@ class SurveysController extends Controller
      */
     public function destroy(Survey $survey)
     {
+        // Checking authorization current user
+        // to destroy this survey
+        $this->authorize('delete', $survey);
+
         $survey->delete();
 
         return redirect()->route('admin.surveys.index')
