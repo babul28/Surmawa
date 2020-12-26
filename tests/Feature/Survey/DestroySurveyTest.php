@@ -13,7 +13,7 @@ class DestroySurveyTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_authorized_lecture_user_can_destroy_specified_survey()
+    public function an_authenticated_lecture_user_can_destroy_specified_survey()
     {
         $lecture = Lecture::factory()->create();
 
@@ -28,7 +28,7 @@ class DestroySurveyTest extends TestCase
     }
 
     /** @test */
-    public function only_authorize_lecture_user_can_destroy_specified_survey()
+    public function only_authenticated_lecture_user_can_destroy_specified_survey()
     {
         $lecture = Lecture::factory()->create();
 

@@ -24,7 +24,7 @@ class CreateSurveyTest extends TestCase
     }
 
     /** @test */
-    public function only_an_authorized_lecture_user_can_visit_create_new_survey_screen()
+    public function only_an_authenticated_lecture_user_can_visit_create_new_survey_screen()
     {
         $this->get('admin/surveys/create')
             ->assertRedirect('login');
@@ -69,7 +69,7 @@ class CreateSurveyTest extends TestCase
     }
 
     /** @test */
-    public function only_an_authorized_lecture_user_can_create_new_survey()
+    public function only_an_authenticated_lecture_user_can_create_new_survey()
     {
         $response = $this->post('admin/surveys', $this->data())
             ->assertRedirect('login');

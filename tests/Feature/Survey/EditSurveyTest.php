@@ -23,7 +23,7 @@ class EditSurveyTest extends TestCase
         ]);
 
         $response = $this->actingAs($lecture)
-            ->get('admin/surveys/' . $lecture->id . '/edit');
+            ->get('admin/surveys/' . $survey->id . '/edit');
 
         $response->assertStatus(200);
         $response->assertViewIs('admin.surveys.edit');
@@ -31,7 +31,7 @@ class EditSurveyTest extends TestCase
     }
 
     /** @test */
-    public function only_authorized_lecture_user_can_visit_edit_specified_survey_page()
+    public function only_authenticated_lecture_user_can_visit_edit_specified_survey_page()
     {
         $lecture = Lecture::factory()->create();
 
@@ -39,7 +39,7 @@ class EditSurveyTest extends TestCase
             'lecture_id' => $lecture->id
         ]);
 
-        $this->get('admin/surveys/' . $lecture->id . '/edit')
+        $this->get('admin/surveys/' . $survey->id . '/edit')
             ->assertRedirect('login');
     }
 

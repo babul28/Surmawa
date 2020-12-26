@@ -22,7 +22,7 @@ class ShowSurveyTest extends TestCase
         ]);
 
         $response = $this->actingAs($lecture)
-            ->get('admin/surveys/' . $lecture->id);
+            ->get('admin/surveys/' . $survey->id);
 
         $response->assertStatus(200);
         $response->assertViewIs('admin.surveys.show');
@@ -30,7 +30,7 @@ class ShowSurveyTest extends TestCase
     }
 
     /** @test */
-    public function only_authorized_lecture_user_can_visit_detail_page()
+    public function only_authenticated_lecture_user_can_visit_detail_page()
     {
         $lecture = Lecture::factory()->create();
 
@@ -38,7 +38,7 @@ class ShowSurveyTest extends TestCase
             'lecture_id' => $lecture->id
         ]);
 
-        $this->get('admin/surveys/' . $lecture->id)
+        $this->get('admin/surveys/' . $survey->id)
             ->assertRedirect('login');
     }
 }
