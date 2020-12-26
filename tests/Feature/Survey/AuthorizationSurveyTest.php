@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Survey;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Models\Survey;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,10 +18,10 @@ class AuthorizationSurveyTest extends TestCase
     {
         $survey = Survey::factory()->create();
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecturer = Lecturer::factory()->create())
             ->get('admin/surveys/' . $survey->id);
 
-        $this->assertAuthenticatedAs($lecture);
+        $this->assertAuthenticatedAs($lecturer);
         $response->assertForbidden();
     }
 
@@ -30,10 +30,10 @@ class AuthorizationSurveyTest extends TestCase
     {
         $survey = Survey::factory()->create();
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecturer = Lecturer::factory()->create())
             ->get('admin/surveys/' . $survey->id . '/edit');
 
-        $this->assertAuthenticatedAs($lecture);
+        $this->assertAuthenticatedAs($lecturer);
         $response->assertForbidden();
     }
 
@@ -42,7 +42,7 @@ class AuthorizationSurveyTest extends TestCase
     {
         $survey = Survey::factory()->create();
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecturer = Lecturer::factory()->create())
             ->put('admin/surveys/' . $survey->id, [
                 'name' => 'Informatics',
                 'departement_name' => 'Electriical Engineering Departement',
@@ -51,7 +51,7 @@ class AuthorizationSurveyTest extends TestCase
                 'expired_at' => Carbon::now()->addDays(5),
             ]);
 
-        $this->assertAuthenticatedAs($lecture);
+        $this->assertAuthenticatedAs($lecturer);
         $response->assertForbidden();
     }
 
@@ -60,10 +60,10 @@ class AuthorizationSurveyTest extends TestCase
     {
         $survey = Survey::factory()->create();
 
-        $response = $this->actingAs($lecture = Lecture::factory()->create())
+        $response = $this->actingAs($lecturer = Lecturer::factory()->create())
             ->delete('admin/surveys/' . $survey->id);
 
-        $this->assertAuthenticatedAs($lecture);
+        $this->assertAuthenticatedAs($lecturer);
         $response->assertForbidden();
     }
 }

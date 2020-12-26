@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class SurveysController extends Controller
 {
 
-    private $lecture;
+    private $lecturer;
 
     /**
      * constructor of SurveyController class
@@ -20,7 +20,7 @@ class SurveysController extends Controller
     {
         $this->middleware('auth');
 
-        $this->lecture = Auth::user();
+        $this->lecturer = Auth::user();
     }
 
     /**
@@ -31,7 +31,7 @@ class SurveysController extends Controller
     public function index()
     {
         return view('admin.surveys.index')
-            ->with('surveys', $this->lecture->surveys);
+            ->with('surveys', $this->lecturer->surveys);
     }
 
     /**
@@ -68,7 +68,7 @@ class SurveysController extends Controller
      */
     public function store(Request $request)
     {
-        $survey = $this->lecture->surveys()->create(
+        $survey = $this->lecturer->surveys()->create(
             array_merge($request->validate($this->rules()), [
                 'survey_code' => Str::random(6),
                 'status' => Survey::ACTIVE

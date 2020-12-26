@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +16,7 @@ class EmailVerificationTest extends TestCase
 
     public function test_email_verification_screen_can_be_rendered()
     {
-        $user = Lecture::factory()->create([
+        $user = Lecturer::factory()->create([
             'email_verified_at' => null,
         ]);
 
@@ -29,7 +29,7 @@ class EmailVerificationTest extends TestCase
     {
         Event::fake();
 
-        $user = Lecture::factory()->create([
+        $user = Lecturer::factory()->create([
             'email_verified_at' => null,
         ]);
 
@@ -48,7 +48,7 @@ class EmailVerificationTest extends TestCase
 
     public function test_email_is_not_verified_with_invalid_hash()
     {
-        $user = Lecture::factory()->create([
+        $user = Lecturer::factory()->create([
             'email_verified_at' => null,
         ]);
 

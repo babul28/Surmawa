@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -31,7 +31,7 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $this->assertCount(1, Lecture::all());
+        $this->assertCount(1, Lecturer::all());
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }

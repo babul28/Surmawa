@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Survey;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Models\Survey;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -15,13 +15,13 @@ class ShowSurveyTest extends TestCase
     /** @test */
     public function show_survey_screen_can_be_rendered()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->get('admin/surveys/' . $survey->id);
 
         $response->assertStatus(200);
@@ -32,10 +32,10 @@ class ShowSurveyTest extends TestCase
     /** @test */
     public function only_authenticated_lecture_user_can_visit_detail_page()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
         $this->get('admin/surveys/' . $survey->id)
