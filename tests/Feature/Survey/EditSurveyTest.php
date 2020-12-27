@@ -59,7 +59,7 @@ class EditSurveyTest extends TestCase
 
         $this->assertCount(1, Survey::all());
         $this->assertEquals('Informatics', $survey->name);
-        $this->assertEquals('Electriical Engineering Departement', $survey->departement_name);
+        $this->assertEquals('Electrical Engineering Department', $survey->department_name);
         $this->assertEquals('Faculty of Engineering', $survey->faculty_name);
         $this->assertEquals('State University of Malang', $survey->university_name);
         $this->assertEquals(Carbon::now()->addDays(5), $survey->expired_at);
@@ -122,7 +122,7 @@ class EditSurveyTest extends TestCase
     }
 
     /** @test */
-    public function the_survey_departement_name_field_is_required()
+    public function the_survey_department_name_field_is_required()
     {
         $lecture = Lecture::factory()->create();
 
@@ -132,12 +132,12 @@ class EditSurveyTest extends TestCase
 
         $response = $this->actingAs($lecture)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
-                'departement_name' => ''
+                'department_name' => ''
             ]));
 
         $this->assertCount(1, Survey::all());
-        $this->assertEquals($survey->departement_name, Survey::first()->departement_name);
-        $response->assertSessionHasErrors('departement_name');
+        $this->assertEquals($survey->department_name, Survey::first()->department_name);
+        $response->assertSessionHasErrors('department_name');
     }
 
     /** @test */
@@ -216,11 +216,16 @@ class EditSurveyTest extends TestCase
         $response->assertSessionHasErrors('expired_at');
     }
 
-    private function data()
+    /**
+     * Data for testing
+     *
+     * @return array
+     */
+    private function data(): array
     {
         return [
             'name' => 'Informatics',
-            'departement_name' => 'Electriical Engineering Departement',
+            'department_name' => 'Electrical Engineering Department',
             'faculty_name' => 'Faculty of Engineering',
             'university_name' => 'State University of Malang',
             'expired_at' => Carbon::now()->addDays(5),

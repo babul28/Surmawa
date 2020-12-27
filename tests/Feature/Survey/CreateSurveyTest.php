@@ -91,15 +91,15 @@ class CreateSurveyTest extends TestCase
     }
 
     /** @test */
-    public function the_departement_name_field_is_required()
+    public function the_department_name_field_is_required()
     {
         $response = $this->actingAs($lecture = Lecture::factory()->create())
             ->post('admin/surveys', array_merge($this->data(), [
-                'departement_name' => ''
+                'department_name' => ''
             ]));
 
         $this->assertCount(0, Survey::all());
-        $response->assertSessionHasErrors('departement_name');
+        $response->assertSessionHasErrors('department_name');
     }
 
     /** @test */
@@ -154,7 +154,7 @@ class CreateSurveyTest extends TestCase
     {
         return [
             'name' => 'informatics',
-            'departement_name' => 'Electriical Engineering Departement',
+            'department_name' => 'Electrical Engineering Department',
             'faculty_name' => 'Faculty of Engineering',
             'university_name' => 'State University of Malang',
             'expired_at' => Carbon::now(),

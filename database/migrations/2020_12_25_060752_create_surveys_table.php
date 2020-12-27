@@ -17,7 +17,7 @@ class CreateSurveysTable extends Migration
             $table->id();
             $table->foreignId('lecture_id')->nullable()->constrained()->onUpdate('cascade');
             $table->string('name');
-            $table->string('departement_name');
+            $table->string('department_name');
             $table->string('faculty_name');
             $table->string('university_name');
             $table->string('survey_code');

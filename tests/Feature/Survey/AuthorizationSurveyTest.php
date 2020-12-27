@@ -45,7 +45,7 @@ class AuthorizationSurveyTest extends TestCase
         $response = $this->actingAs($lecture = Lecture::factory()->create())
             ->put('admin/surveys/' . $survey->id, [
                 'name' => 'Informatics',
-                'departement_name' => 'Electriical Engineering Departement',
+                'department_name' => 'Electrical Engineering Department',
                 'faculty_name' => 'Faculty of Engineering',
                 'university_name' => 'State University of Malang',
                 'expired_at' => Carbon::now()->addDays(5),

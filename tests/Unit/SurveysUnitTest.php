@@ -80,11 +80,11 @@ class SurveysUnitTest extends TestCase
         $this->assertCount(2, $surveys);
     }
 
-    private function data()
+    private function data(): array
     {
         return [
             'name' => 'informatics',
-            'departement_name' => 'Electriical Engineering Departement',
+            'department_name' => 'Electrical Engineering Department',
             'faculty_name' => 'Faculty of Engineering',
             'university_name' => 'State University of Malang',
             'survey_code' => Str::random(6),

@@ -22,12 +22,12 @@ class SurveyFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'lecture_id' => Lecture::factory(),
             'name' => $this->faker->sentence,
-            'departement_name' => $this->faker->sentence,
+            'department_name' => $this->faker->sentence,
             'faculty_name' => $this->faker->sentence,
             'university_name' => $this->faker->sentence,
             'survey_code' => Str::random(6),

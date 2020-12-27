@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Survey;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -26,7 +29,7 @@ class SurveysController extends Controller
     /**
      * Show list of surveys
      *
-     * @return Illuminate/Http/Response
+     * @return View
      */
     public function index()
     {
@@ -38,9 +41,10 @@ class SurveysController extends Controller
      * Show specified survey
      *
      * @param Survey $survey
-     * @return Illuminate\Http\Response
+     * @return View
+     * @throws AuthorizationException
      */
-    public function show(Survey $survey)
+    public function show(Survey $survey): View
     {
         // Checking authorization current user for
         // view this survey
@@ -53,9 +57,9 @@ class SurveysController extends Controller
     /**
      * Show view for create new survey
      *
-     * @return Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.surveys.create');
     }
@@ -64,9 +68,9 @@ class SurveysController extends Controller
      * Store new survey on databases
      *
      * @param Request $request
-     * @return Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $survey = $this->lecture->surveys()->create(
             array_merge($request->validate($this->rules()), [
@@ -86,9 +90,10 @@ class SurveysController extends Controller
      * Show view for editing specified survey
      *
      * @param Survey $survey
-     * @return Illuminate\Http\Response
+     * @return View
+     * @throws AuthorizationException
      */
-    public function edit(Survey $survey)
+    public function edit(Survey $survey): View
     {
         // Checking authorization current user for
         // updating this survey
@@ -103,9 +108,10 @@ class SurveysController extends Controller
      *
      * @param Request $request
      * @param Survey $survey
-     * @return Illuminate\Support\Response
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function update(Request $request, Survey $survey)
+    public function update(Request $request, Survey $survey): RedirectResponse
     {
         // Checking authorization current user for
         // updating this survey
@@ -124,9 +130,10 @@ class SurveysController extends Controller
      * Destroy specified survey from databases
      *
      * @param Survey $survey
-     * @return Illuminate\Http\Response
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(Survey $survey)
+    public function destroy(Survey $survey): RedirectResponse
     {
         // Checking authorization current user
         // to destroy this survey
@@ -146,11 +153,11 @@ class SurveysController extends Controller
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|string|max:255',
-            'departement_name' => 'required|string|max:255',
+            'department_name' => 'required|string|max:255',
             'faculty_name' => 'required|string|max:255',
             'university_name' => 'required|string|max:255',
             'expired_at' => 'required|date',
