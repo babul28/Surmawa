@@ -27,7 +27,7 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
             'university' => 'State University of Malang',
             'faculty' => 'Faculty of Engineering',
-            'departement' => 'Informatics Engineering Department',
+            'department' => 'Informatics Engineering Department',
         ]);
 
         $this->assertAuthenticated();

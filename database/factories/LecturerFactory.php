@@ -30,7 +30,7 @@ class LecturerFactory extends Factory
             'remember_token' => Str::random(10),
             'university' => 'State University of Malang',
             'faculty' => 'Faculty of Engineering',
-            'departement' => 'Informatics Engineering Departement',
+            'department' => 'Informatics Engineering Department',
         ];
     }
 }

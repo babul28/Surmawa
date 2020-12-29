@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
             'password' => 'required|string|confirmed|min:8',
             'university' => 'required|string|max:255',
             'faculty' => 'required|string|max:255',
-            'departement' => 'required|string|max:255',
+            'department' => 'required|string|max:255',
         ]);
     }
 }

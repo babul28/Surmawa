@@ -21,7 +21,7 @@ class CreateLecturesTable extends Migration
             $table->string('password');
             $table->string('university');
             $table->string('faculty');
-            $table->string('departement');
+            $table->string('department');
             $table->rememberToken();
             $table->timestamps();
         });
