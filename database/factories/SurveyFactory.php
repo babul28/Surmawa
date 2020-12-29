@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Models\Survey;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -25,7 +25,7 @@ class SurveyFactory extends Factory
     public function definition(): array
     {
         return [
-            'lecture_id' => Lecture::factory(),
+            'lecturer_id' => Lecturer::factory(),
             'name' => $this->faker->sentence,
             'department_name' => $this->faker->sentence,
             'faculty_name' => $this->faker->sentence,

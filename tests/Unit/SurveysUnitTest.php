@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Models\Survey;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,21 +16,21 @@ class SurveysUnitTest extends TestCase
     /** @test */
     public function a_lecture_can_create_new_survey()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
-        $lecture->surveys()->create($this->data());
+        $lecturer->surveys()->create($this->data());
 
         $this->assertCount(1, Survey::all());
-        $this->assertEquals($lecture->id, Survey::first()->lecture_id);
+        $this->assertEquals($lecturer->id, Survey::first()->lecturer_id);
     }
 
     /** @test */
     public function a_lecture_can_get_list_of_the_survey_they_have()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
-        $lecture->surveys()->create($this->data());
-        $lecture->surveys()->create(array_merge($this->data(), [
+        $lecturer->surveys()->create($this->data());
+        $lecturer->surveys()->create(array_merge($this->data(), [
             'name' => 'electrical'
         ]));
 
@@ -40,12 +40,12 @@ class SurveysUnitTest extends TestCase
     /** @test */
     public function a_lecture_can_get_details_of_specified_survey_by_id()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
-        $survey = $lecture->surveys()->create($this->data());
+        $survey = $lecturer->surveys()->create($this->data());
 
         $result = Survey::where('id', $survey->id)
-            ->where('lecture_id', $lecture->id)
+            ->where('lecturer_id', $lecturer->id)
             ->get();
 
         $this->assertCount(1, $result);
@@ -54,25 +54,25 @@ class SurveysUnitTest extends TestCase
     /** @test */
     public function a_lecture_can_get_all_active_surveys()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         // jump to 5 hours into the future
         $this->travel(5)->hours();
-        $lecture->surveys()->create($this->data());
+        $lecturer->surveys()->create($this->data());
 
         // jump to 10 days into the past
         $this->travel(-10)->days();
-        $lecture->surveys()->create($this->data());
+        $lecturer->surveys()->create($this->data());
 
         // jump back to current time
         $this->travelBack();
         // jump to 5 days into the future
         $this->travel(5)->days();
-        $lecture->surveys()->create($this->data());
+        $lecturer->surveys()->create($this->data());
 
         $this->travelBack();
 
-        $surveys = Survey::where('lecture_id', $lecture->id)
+        $surveys = Survey::where('lecturer_id', $lecturer->id)
             ->where('expired_at', '>=', Carbon::now())
             ->get();
 

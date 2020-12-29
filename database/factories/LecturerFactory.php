@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class LectureFactory extends Factory
+class LecturerFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Lecture::class;
+    protected $model = Lecturer::class;
 
     /**
      * Define the model's default state.

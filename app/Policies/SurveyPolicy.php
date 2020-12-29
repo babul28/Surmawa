@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Models\Survey;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -13,36 +13,36 @@ class SurveyPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\Lecture  $lecture
+     * @param  \App\Models\Lecturer  $lecturer
      * @param  \App\Models\Survey  $survey
      * @return bool
      */
-    public function view(Lecture $lecture, Survey $survey)
+    public function view(Lecturer $lecturer, Survey $survey)
     {
-        return (int) $lecture->id === (int) $survey->lecture_id;
+        return (int) $lecturer->id === (int) $survey->lecturer_id;
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\Lecture  $lecture
+     * @param  \App\Models\Lecturer  $lecturer
      * @param  \App\Models\Survey  $survey
      * @return bool
      */
-    public function update(Lecture $lecture, Survey $survey)
+    public function update(Lecturer $lecturer, Survey $survey)
     {
-        return (int) $lecture->id === (int) $survey->lecture_id;
+        return (int) $lecturer->id === (int) $survey->lecturer_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\Lecture  $lecture
+     * @param  \App\Models\Lecturer  $lecturer
      * @param  \App\Models\Survey  $survey
      * @return bool
      */
-    public function delete(Lecture $lecture, Survey $survey)
+    public function delete(Lecturer $lecturer, Survey $survey)
     {
-        return (int) $lecture->id === (int) $survey->lecture_id;
+        return (int) $lecturer->id === (int) $survey->lecturer_id;
     }
 }

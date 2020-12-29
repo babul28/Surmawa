@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Survey;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Models\Survey;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -15,13 +15,13 @@ class DestroySurveyTest extends TestCase
     /** @test */
     public function an_authenticated_lecture_user_can_destroy_specified_survey()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->delete('admin/surveys/' . $survey->id);
 
         $this->assertCount(0, Survey::all());
@@ -30,10 +30,10 @@ class DestroySurveyTest extends TestCase
     /** @test */
     public function only_authenticated_lecture_user_can_destroy_specified_survey()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
         $response = $this->delete('admin/surveys/' . $survey->id);
@@ -45,13 +45,13 @@ class DestroySurveyTest extends TestCase
     /** @test */
     public function redirect_to_surveys_index_page_after_successfully_delete_page()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->delete('admin/surveys/' . $survey->id);
 
         $this->assertCount(0, Survey::all());
@@ -61,13 +61,13 @@ class DestroySurveyTest extends TestCase
     /** @test */
     public function redirect_to_surveys_index_page_with_flash_message_after_successfully_delete_page()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->delete('admin/surveys/' . $survey->id);
 
         $this->assertCount(0, Survey::all());

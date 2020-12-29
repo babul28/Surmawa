@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::login($user = Lecture::create(
+        Auth::login($user = Lecturer::create(
             array_merge(
                 $this->validationRequest($request),
                 [
@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
     {
         return $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:lectures',
+            'email' => 'required|string|email|max:255|unique:lecturers',
             'password' => 'required|string|confirmed|min:8',
             'university' => 'required|string|max:255',
             'faculty' => 'required|string|max:255',

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Survey;
 
-use App\Models\Lecture;
+use App\Models\Lecturer;
 use App\Models\Survey;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,13 +16,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function edit_survey_screen_can_be_rendered()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->get('admin/surveys/' . $survey->id . '/edit');
 
         $response->assertStatus(200);
@@ -33,10 +33,10 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function only_authenticated_lecture_user_can_visit_edit_specified_survey_page()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
         $this->get('admin/surveys/' . $survey->id . '/edit')
@@ -46,13 +46,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function an_lecture_user_can_edit_specified_survey()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $this->actingAs($lecture)
+        $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, $this->data());
 
         $survey = Survey::first();
@@ -68,13 +68,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function redirect_into_detail_survey_page_after_successfully_update_data()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, $this->data());
 
         $survey = Survey::first();
@@ -86,13 +86,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function redirect_into_detail_survey_with_flash_message_page_after_successfully_update_data()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, $this->data());
 
         $survey = Survey::first();
@@ -105,13 +105,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function the_survey_name_field_is_required()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'name' => ''
             ]));
@@ -124,13 +124,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function the_survey_department_name_field_is_required()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'department_name' => ''
             ]));
@@ -143,13 +143,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function the_survey_faculty_name_field_is_required()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'faculty_name' => ''
             ]));
@@ -162,13 +162,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function the_survey_university_name_field_is_required()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'university_name' => ''
             ]));
@@ -181,13 +181,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function the_survey_expired_at_field_is_required()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'expired_at' => ''
             ]));
@@ -200,13 +200,13 @@ class EditSurveyTest extends TestCase
     /** @test */
     public function the_expired_at_field_is_date()
     {
-        $lecture = Lecture::factory()->create();
+        $lecturer = Lecturer::factory()->create();
 
         $survey = Survey::factory()->create([
-            'lecture_id' => $lecture->id
+            'lecturer_id' => $lecturer->id
         ]);
 
-        $response = $this->actingAs($lecture)
+        $response = $this->actingAs($lecturer)
             ->put('admin/surveys/' . $survey->id, array_merge($this->data(), [
                 'expired_at' => 'ini bukan date'
             ]));
