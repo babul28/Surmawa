@@ -27,7 +27,7 @@ class IndexSurveyTest extends TestCase
     public function only_an_authenticated_user_can_access_survey_index_screen()
     {
         $response = $this->get('admin/surveys')
-            ->assertRedirect('login');
+            ->assertRedirect('/admin/login');
     }
 
     /** @test */

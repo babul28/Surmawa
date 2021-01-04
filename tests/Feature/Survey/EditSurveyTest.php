@@ -40,7 +40,7 @@ class EditSurveyTest extends TestCase
         ]);
 
         $this->get('admin/surveys/' . $survey->id . '/edit')
-            ->assertRedirect('login');
+            ->assertRedirect('/admin/login');
     }
 
     /** @test */

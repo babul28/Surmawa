@@ -39,6 +39,6 @@ class ShowSurveyTest extends TestCase
         ]);
 
         $this->get('admin/surveys/' . $survey->id)
-            ->assertRedirect('login');
+            ->assertRedirect('/admin/login');
     }
 }

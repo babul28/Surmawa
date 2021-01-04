@@ -38,7 +38,7 @@ class DestroySurveyTest extends TestCase
 
         $response = $this->delete('admin/surveys/' . $survey->id);
 
-        $response->assertRedirect('login');
+        $response->assertRedirect('/admin/login');
         $this->assertCount(1, Survey::all());
     }
 
