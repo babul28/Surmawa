@@ -36,19 +36,39 @@
 
         {{-- Right Section --}}
         <div class="w-full lg:w-2/3 xl:w-1/3 bg-gray-800 flex flex-col justify-center items-center px-4 py-16 lg:p-8">
+            @error('survey_code*')
+            <div class="w-full bg-red-700 px-2 py-3 rounded-lg text-white flex items-stretch mb-5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="w-11/12 pl-2">{{ $message }}</span>
+            </div>
+            @enderror
             <div class="w-full md:w-2/3 lg:w-full mx-12 h-52 bg-gray-600 rounded-xl p-6">
                 <h3 class="text-lg uppercase font-medium text-gray-100 text-center">Masukkan Kode Kelas</h3>
-                <form action="" class="flex flex-col items-center mt-6">
+                <form action="{{ route('college.join.survey') }}" method="POST" class="flex flex-col items-center mt-6"
+                    autocomplete="off">
+                    @csrf
                     <div class="flex justify-between">
-                        <x-college.input type="text" name="class_code[]" placeholder="-" />
-                        <x-college.input type="text" name="class_code[]" placeholder="-" />
-                        <x-college.input type="text" name="class_code[]" placeholder="-" />
-                        <x-college.input type="text" name="class_code[]" placeholder="-" />
-                        <x-college.input type="text" name="class_code[]" placeholder="-" />
+                        <x-college.input type="text" name="survey_code[]" placeholder="-"
+                            value="{{ old('survey_code.0') }}" />
+                        <x-college.input type="text" name="survey_code[]" placeholder="-"
+                            value="{{ old('survey_code.1') }}" />
+                        <x-college.input type="text" name="survey_code[]" placeholder="-"
+                            value="{{ old('survey_code.2') }}" />
+                        <x-college.input type="text" name="survey_code[]" placeholder="-"
+                            value="{{ old('survey_code.3') }}" />
+                        <x-college.input type="text" name="survey_code[]" placeholder="-"
+                            value="{{ old('survey_code.4') }}" />
+                        <x-college.input type="text" name="survey_code[]" placeholder="-"
+                            value="{{ old('survey_code.5') }}" />
                     </div>
                 </form>
             </div>
-            <button class="px-20 py-4 bg-gray-100 rounded-md font-bold mt-16 hover:bg-gray-50">Submit</button>
+            <a href="{{ route('college.join.survey') }}" x-on:click.prevent="submitForm()"
+                class="px-20 py-4 bg-gray-100 rounded-md font-bold mt-16 hover:bg-gray-50">Submit</a>
         </div>
         {{-- End Right Section --}}
     </div>
@@ -77,6 +97,10 @@
                     return this.activeIndex -= 1
                 }
             }
+        }
+
+        function submitForm() {
+            console.log(document.querySelector('form').submit());
         }
     </script>
 </x-college-layout>

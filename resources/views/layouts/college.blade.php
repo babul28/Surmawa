@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ? $title . ' |' : '' }} {{ config('app.name', 'Surmawa') }}</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -20,14 +20,9 @@
 
 <body>
     <div class="font-sans text-gray-900 antialiased bg-gray-100">
-        <x-guest.header>
-            <a href="/">
-                <x-application-logo class="w-24 h-12 fill-current text-gray-500" />
-            </a>
-        </x-guest.header>
+        {{ $header ?? '' }}
 
         {{ $slot }}
-
     </div>
 </body>
 

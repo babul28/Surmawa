@@ -15,9 +15,9 @@ module.exports = {
                 default: "1rem",
                 sm: "2rem",
                 lg: "4rem",
-                xl: "6rem"
-            }
-        }
+                xl: "6rem",
+            },
+        },
     },
 
     variants: {
@@ -26,5 +26,7 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
 };
